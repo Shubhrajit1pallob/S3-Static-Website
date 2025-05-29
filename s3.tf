@@ -33,3 +33,15 @@ resource "aws_s3_bucket_policy" "static_website_public_read" {
     ]
   })
 }
+
+resource "aws_s3_bucket_website_configuration" "my_static_website" {
+  bucket = aws_s3_bucket.static_website_bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
