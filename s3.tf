@@ -45,3 +45,17 @@ resource "aws_s3_bucket_website_configuration" "my_static_website" {
     key = "error.html"
   }
 }
+resource "aws_s3_object" "index_html" {
+  bucket       = aws_s3_bucket.static_website_bucket.id
+  key          = "index.html"
+  source       = "build/index.html"
+  etag         = filemd5("build/index.html")
+  content_type = "text/html"
+}
+resource "aws_s3_object" "error_html" {
+  bucket       = aws_s3_bucket.static_website_bucket.id
+  key          = "error.html"
+  source       = "build/error.html"
+  etag         = filemd5("build/error.html")
+  content_type = "text/html"
+}
